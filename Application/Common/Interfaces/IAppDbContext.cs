@@ -12,5 +12,6 @@ namespace Application.Common.Interfaces
     {
          DbSet<AppUser> AppUsers { get;}
          DbSet<Profile> Profiles { get;}
+         DbSet<Post> Posts { get;}
     }
 }

@@ -6,7 +6,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 namespace Application.Features.Authentication.Commands.Login
 {
-    internal class LoginCommandHandler(IAuthanticationService _authService,UserManager<AppUser>_userManager) : IRequestHandler<LoginCommand, Result<LoggedUserDto>>
+    internal class LoginCommandHandler(IAuthanticationService _authService,UserManager<AppUser>_userManager,IAppDbContext _context) : IRequestHandler<LoginCommand, Result<LoggedUserDto>>
     {
         public async Task<Result<LoggedUserDto>> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
@@ -22,6 +22,13 @@ namespace Application.Features.Authentication.Commands.Login
                 return Result<LoggedUserDto>.Failure(new Error("Invalid Credintiels"));
             }
             await _userManager.ResetAccessFailedCountAsync(user);
+
+
+            int profileCount = _context.Profiles.Where(x => x.UserId == user.Id).Count();
+            if (profileCount <= 0)
+                return Result<LoggedUserDto>.Failure(new Error("no such Profile with this email"));
+
+
 
             var token = await _authService.CreateJWTToken(user);
             var claimedRefreshToken = _authService.GetRefrehToken();

@@ -18,11 +18,11 @@ namespace Infrastructure.Data
     {
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Profile> Profiles { get; set; }
+        public DbSet<Post> Posts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
-
+        {
+            base.OnModelCreating(modelBuilder);
 
 
         var dateTimeConverter = new ValueConverter<DateTime, DateTime>(

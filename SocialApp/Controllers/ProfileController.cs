@@ -39,8 +39,7 @@ namespace SocialApp.Controllers
             return NoContent();
 
         }
-
-        [HttpDelete]
+        [HttpDelete] 
         public async Task<IActionResult> Delete(int id)
         {
             var userId = GetLoggedUserId();
@@ -53,6 +52,5 @@ namespace SocialApp.Controllers
             return NoContent();
 
         }
-
     }
 }

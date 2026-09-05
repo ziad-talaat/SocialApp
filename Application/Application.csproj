@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Post\Queries\" />
     <Folder Include="Features\Profile\Queries\" />
   </ItemGroup>
 

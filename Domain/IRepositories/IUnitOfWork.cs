@@ -12,6 +12,7 @@ namespace Domain.IRepositories
     {
         IGenericRepository<AppUser> UserRepository { get; }
         IGenericRepository<Profile> ProfileRepository { get; }
+        IGenericRepository<Post>    PostRepository { get; }
         Task<int> SaveAsync(CancellationToken cancellationToken);
        
     }

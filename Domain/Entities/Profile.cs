@@ -18,6 +18,8 @@ namespace Domain.Entities
         public Guid UserId { get; set; }
         public AppUser User { get; set; } = null!;
 
+        public ICollection<Post> Posts { get; set; } = new List<Post>();
+
 
 
     }

@@ -25,7 +25,7 @@ namespace Application.Features.Profile.Commands.CreateProfile
             {
                 ImageUrl = request.profileDto.ImageUrl,
                 ProfileName = request.profileDto.ProfileName,
-                Description = request.profileDto.Description,
+                Bio = request.profileDto.Bio,
                 UserId = request.userId
             };
            await _unitOfWork.ProfileRepository.Insert(profile);

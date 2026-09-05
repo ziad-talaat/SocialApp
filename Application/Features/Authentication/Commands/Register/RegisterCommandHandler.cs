@@ -37,7 +37,7 @@ namespace Application.Features.Authentication.Commands.Register
             {
                 ImageUrl = request.registerDto.ImageUrl,
                 ProfileName = request.registerDto.ProfileName,
-                Description = request.registerDto.Description,
+                Bio = request.registerDto.Description,
                 UserId =user.Id
             };
            await  _unitOfWork.ProfileRepository.Insert(profile);

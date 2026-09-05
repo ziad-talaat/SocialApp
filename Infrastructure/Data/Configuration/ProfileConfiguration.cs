@@ -14,7 +14,7 @@ namespace Infrastructure.Data.Configuration
         public void Configure(EntityTypeBuilder<Profile> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Description).HasMaxLength(1000);
+            builder.Property(x => x.Bio).HasMaxLength(1000);
             builder.Property(x => x.ProfileName).IsRequired();
 
             builder.HasOne(x => x.User).WithMany(x => x.Profiles)
