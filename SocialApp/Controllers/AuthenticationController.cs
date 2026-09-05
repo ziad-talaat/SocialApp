@@ -7,11 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SocialApp.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class AuthenticationController(IMediator _mediator) : ControllerBase
+    public class AuthenticationController(IMediator _mediator) : BaseController
     {
-
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto loginDto)
         {

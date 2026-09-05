@@ -87,7 +87,7 @@ namespace Application.Service
                     Token = token,
                     Email = appUser.Email,
                     UserName = appUser.UserName,
-                    photoUrl = appUser?.ImageUrl,
+                    //photoUrl = appUser?.ImageUrl,
                     Id = appUser.Id,
                 };
 

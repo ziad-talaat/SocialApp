@@ -11,6 +11,7 @@ namespace Domain.IRepositories
     public interface IUnitOfWork:IDisposable
     {
         IGenericRepository<AppUser> UserRepository { get; }
+        IGenericRepository<Profile> ProfileRepository { get; }
         Task<int> SaveAsync(CancellationToken cancellationToken);
        
     }

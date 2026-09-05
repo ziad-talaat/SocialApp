@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
-
 namespace Application.Behaviors
 {
     public class ValidationBehavior<TRequest, TResponse>(IEnumerable<IValidator<TRequest>> validators)

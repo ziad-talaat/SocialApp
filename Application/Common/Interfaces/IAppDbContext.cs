@@ -11,5 +11,6 @@ namespace Application.Common.Interfaces
     public interface IAppDbContext
     {
          DbSet<AppUser> AppUsers { get;}
+         DbSet<Profile> Profiles { get;}
     }
 }

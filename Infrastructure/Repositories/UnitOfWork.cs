@@ -13,10 +13,14 @@ namespace Infrastructure.Repositories
     {
         private readonly AppDbContext _dbContext;
         public IGenericRepository<AppUser> UserRepository { get;private set; }
+
+        public IGenericRepository<Profile> ProfileRepository { get;private set; }
+
         public UnitOfWork(AppDbContext dbContext)
         {
             _dbContext= dbContext;
             UserRepository = new GenericRepository<AppUser>(_dbContext);
+            ProfileRepository= new GenericRepository<Profile>(_dbContext);
         }
         public void Dispose()
         {

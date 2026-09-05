@@ -10,7 +10,6 @@ namespace Application.Features.Authentication.DTOS
 {
     public sealed class RegisterDto
     {
-
         public string? ImageUrl { get; set; }
         public DateOnly DateOfBirth { get; set; }
         public  required  string  Email { get; set; }

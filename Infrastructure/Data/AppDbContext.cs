@@ -17,6 +17,7 @@ namespace Infrastructure.Data
     public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>(options),IAppDbContext
     {
         public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
