@@ -17,8 +17,8 @@ namespace Infrastructure.Data.Configuration
             builder.Property(x => x.Bio).HasMaxLength(1000);
             builder.Property(x => x.ProfileName).IsRequired();
 
-            builder.HasOne(x => x.User).WithMany(x => x.Profiles)
-                   .HasForeignKey(x => x.UserId).IsRequired();
+            builder.HasOne(x => x.User).WithOne(x => x.Profile)
+                   .HasForeignKey<Profile>(x => x.UserId).IsRequired();
             
         }
     }

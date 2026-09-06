@@ -18,6 +18,7 @@ namespace Domain.Entities
         public  DateTime? RefreshTokenExpiration { get; set; }
 
 
-        public ICollection<Profile> Profiles { get; set; } = new List<Profile>();
+        public Profile Profile { get; set; }
+
     }
 }

@@ -116,9 +116,6 @@ namespace Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImagesUrl")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("ProfileId")
                         .HasColumnType("int");
 
@@ -127,6 +124,28 @@ namespace Infrastructure.Migrations
                     b.HasIndex("ProfileId");
 
                     b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("Domain.Entities.PostImages", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.ToTable("PostImages");
                 });
 
             modelBuilder.Entity("Domain.Entities.Profile", b =>
@@ -162,7 +181,8 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Profiles");
                 });
@@ -309,11 +329,22 @@ namespace Infrastructure.Migrations
                     b.Navigation("Profile");
                 });
 
+            modelBuilder.Entity("Domain.Entities.PostImages", b =>
+                {
+                    b.HasOne("Domain.Entities.Post", "Post")
+                        .WithMany("PostImages")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+                });
+
             modelBuilder.Entity("Domain.Entities.Profile", b =>
                 {
                     b.HasOne("Domain.Entities.AppUser", "User")
-                        .WithMany("Profiles")
-                        .HasForeignKey("UserId")
+                        .WithOne("Profile")
+                        .HasForeignKey("Domain.Entities.Profile", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -373,7 +404,13 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.AppUser", b =>
                 {
-                    b.Navigation("Profiles");
+                    b.Navigation("Profile")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.Post", b =>
+                {
+                    b.Navigation("PostImages");
                 });
 
             modelBuilder.Entity("Domain.Entities.Profile", b =>
