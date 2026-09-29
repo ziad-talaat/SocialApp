@@ -1,8 +1,8 @@
 ﻿using Application.Common.ResultPattern;
 using Application.Features.Post.Commands.CreatePost;
-using Application.Features.Post.Commands.Dtos;
+using Application.Features.Post.Commands.DeletePostCommand;
 using Application.Features.Post.Commands.UpdateCommand;
-using Application.Features.Post.DeletePost;
+using Application.Features.Post.Dtos;
 using Application.Features.Profile.Commands.CreateProfile;
 using Application.Features.Profile.Commands.DeleteProfileCommand;
 using Application.Features.Profile.Commands.UpdateProfileCommand;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Application.Features.Profile.DTOS;
 using FluentValidation;
 
-namespace Application.Features.Profile.Commands.SharedValidator
+namespace Application.Features.Profile.SharedValidator
 {
     internal sealed  class ProfileDtoValidator:AbstractValidator<ProfileDto>
     {

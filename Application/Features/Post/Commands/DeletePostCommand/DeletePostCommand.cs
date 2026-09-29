@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Application.Common.ResultPattern;
 using MediatR;
 
-namespace Application.Features.Post.DeletePost
+namespace Application.Features.Post.Commands.DeletePostCommand
 {
     public sealed  record DeletePostCommand(int postId,Guid userId):IRequest<Result>;
     

@@ -1,4 +1,4 @@
-﻿using Application.Features.Profile.Commands.SharedValidator;
+﻿using Application.Features.Profile.SharedValidator;
 using FluentValidation;
 namespace Application.Features.Profile.Commands.CreateProfile
 {

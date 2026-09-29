@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Post.Commands.Dtos
+namespace Application.Features.Post.Dtos
 {
     public sealed class PostDto
     {

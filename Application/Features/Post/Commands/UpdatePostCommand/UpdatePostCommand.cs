@@ -1,5 +1,5 @@
 ﻿using Application.Common.ResultPattern;
-using Application.Features.Post.Commands.Dtos;
+using Application.Features.Post.Dtos;
 using MediatR;
 namespace Application.Features.Post.Commands.UpdateCommand
 {

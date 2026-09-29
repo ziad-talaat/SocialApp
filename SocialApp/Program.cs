@@ -19,6 +19,7 @@ namespace SocialApp
                 app.UseSwaggerUI();
             }
 
+            app.UseRequestLocalization();
             app.UseAuthentication();
             app.UseAuthorization();
 

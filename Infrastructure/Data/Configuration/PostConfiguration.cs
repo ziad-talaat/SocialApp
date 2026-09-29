@@ -12,6 +12,9 @@ namespace Infrastructure.Data.Configuration
                 .HasForeignKey(x => x.ProfileId).IsRequired();
             builder.HasMany(x => x.PostImages).WithOne(x => x.Post)
                 .HasForeignKey(x => x.PostId).IsRequired();
+
+            builder.HasOne(x => x.AppUser).WithMany(x => x.Posts)
+                .HasForeignKey(x => x.UserId).IsRequired().OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

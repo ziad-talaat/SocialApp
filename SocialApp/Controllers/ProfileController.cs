@@ -6,11 +6,12 @@ using Application.Features.Profile.DTOS;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 
 namespace SocialApp.Controllers
 {
     [Authorize]
-    public class ProfileController(IMediator _mediator) : BaseController
+    public class ProfileController(IMediator _mediator,IStringLocalizer<ProfileController>_localizer) : BaseController
     {
         [HttpPost]
         public async Task <IActionResult> Post(ProfileDto profileDto)

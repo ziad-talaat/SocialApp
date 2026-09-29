@@ -1,4 +1,5 @@
 ﻿
+using System.Globalization;
 using System.Text;
 using Application.Behaviors;
 using Application.Common.Interfaces;
@@ -9,9 +10,13 @@ using FluentValidation;
 using Infrastructure.Data;
 using Infrastructure.Options;
 using Infrastructure.Repositories;
+using Infrastructure.Services;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,6 +41,26 @@ namespace Infrastructure.ServicesDependencies
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IAuthanticationService, AuthenticationService>();
             services.AddScoped<IAppDbContext, AppDbContext>();
+            services.AddScoped<ICurrentUser, CurrentUser>();
+
+            services.AddLocalization(option => option.ResourcesPath = "Resources");
+            services.AddMvc().AddDataAnnotationsLocalization();
+            services.Configure<RequestLocalizationOptions>(option =>
+            {
+                var supportedCultures = new[]
+                {
+                    new CultureInfo("en"),
+                    new CultureInfo("en-US"),
+                    new CultureInfo("ar"),
+                    new CultureInfo("ar-EG"),
+                };
+                option.DefaultRequestCulture = new RequestCulture(culture: "en", uiCulture: "en");
+                option.SupportedCultures= supportedCultures;
+                option.SupportedUICultures= supportedCultures;
+            });
+
+
+
 
           
             services.AddIdentity<AppUser, IdentityRole<Guid>>(options =>

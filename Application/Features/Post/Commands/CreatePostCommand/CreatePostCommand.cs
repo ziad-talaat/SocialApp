@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Common.ResultPattern;
-using Application.Features.Post.Commands.Dtos;
+using Application.Features.Post.Dtos;
 using MediatR;
 
 namespace Application.Features.Post.Commands.CreatePost

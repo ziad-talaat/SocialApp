@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Application.Features.Post.Commands.Dtos;
+using Application.Features.Post.Dtos;
 using FluentValidation;
 
 namespace Application.Features.Post.SharedValidators

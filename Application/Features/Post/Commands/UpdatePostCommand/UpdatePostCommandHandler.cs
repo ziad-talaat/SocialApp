@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Application.Common.Interfaces;
 using Application.Common.ResultPattern;
-using Application.Features.Post.Commands.Dtos;
 using Domain.IRepositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

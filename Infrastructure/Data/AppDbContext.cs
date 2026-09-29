@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace Infrastructure.Data
 {
@@ -19,6 +18,8 @@ namespace Infrastructure.Data
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Profile> Profiles { get; set; }
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Vote> Votes { get; set; }
+        public DbSet<PostVote> PostVotes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

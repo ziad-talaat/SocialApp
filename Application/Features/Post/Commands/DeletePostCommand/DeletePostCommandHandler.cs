@@ -9,7 +9,7 @@ using Domain.IRepositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Features.Post.DeletePost
+namespace Application.Features.Post.Commands.DeletePostCommand
 {
     internal class DeletePostCommandHandler(IAppDbContext _context, IUnitOfWork _unitOfWork) : IRequestHandler<DeletePostCommand, Result>
     {

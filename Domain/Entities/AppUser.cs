@@ -20,5 +20,8 @@ namespace Domain.Entities
 
         public Profile Profile { get; set; }
 
+        public ICollection<PostVote> PostVotes { get; set; } = new List<PostVote>();
+        public ICollection<Post> Posts { get; set; } = new List<Post>();
+
     }
 }

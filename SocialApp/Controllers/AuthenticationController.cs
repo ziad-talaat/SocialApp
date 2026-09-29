@@ -4,6 +4,7 @@ using Application.Features.Authentication.Commands.Register;
 using Application.Features.Authentication.DTOS;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 
 namespace SocialApp.Controllers
 {
@@ -28,5 +29,8 @@ namespace SocialApp.Controllers
                 return Ok(result.Value);
             return BadRequest(result.Error);
         }
+
+
+
     }
 }

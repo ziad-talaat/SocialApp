@@ -119,9 +119,14 @@ namespace Infrastructure.Migrations
                     b.Property<int>("ProfileId")
                         .HasColumnType("int");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProfileId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Posts");
                 });
@@ -146,6 +151,33 @@ namespace Infrastructure.Migrations
                     b.HasIndex("PostId");
 
                     b.ToTable("PostImages");
+                });
+
+            modelBuilder.Entity("Domain.Entities.PostVote", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("VoteType")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("UserId", "PostId")
+                        .IsUnique();
+
+                    b.ToTable("PostVotes");
                 });
 
             modelBuilder.Entity("Domain.Entities.Profile", b =>
@@ -185,6 +217,23 @@ namespace Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Profiles");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Vote", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("VoteName")
+                        .HasColumnType("int")
+                        .HasColumnName("VoteValue");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Votes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
@@ -326,6 +375,14 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Entities.AppUser", "AppUser")
+                        .WithMany("Posts")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
                     b.Navigation("Profile");
                 });
 
@@ -338,6 +395,25 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Post");
+                });
+
+            modelBuilder.Entity("Domain.Entities.PostVote", b =>
+                {
+                    b.HasOne("Domain.Entities.Post", "Post")
+                        .WithMany("PostVotes")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.AppUser", "User")
+                        .WithMany("PostVotes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.Profile", b =>
@@ -404,6 +480,10 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.AppUser", b =>
                 {
+                    b.Navigation("PostVotes");
+
+                    b.Navigation("Posts");
+
                     b.Navigation("Profile")
                         .IsRequired();
                 });
@@ -411,6 +491,8 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.Post", b =>
                 {
                     b.Navigation("PostImages");
+
+                    b.Navigation("PostVotes");
                 });
 
             modelBuilder.Entity("Domain.Entities.Profile", b =>
