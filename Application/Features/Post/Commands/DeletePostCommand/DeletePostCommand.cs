@@ -8,7 +8,7 @@ using MediatR;
 
 namespace Application.Features.Post.Commands.DeletePostCommand
 {
-    public sealed  record DeletePostCommand(int postId,Guid userId):IRequest<Result>;
+    public sealed  record DeletePostCommand(int postId):IRequest<Result>;
     
     
 }

@@ -14,9 +14,9 @@ using Infrastructure.Services;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
-using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -42,8 +42,8 @@ namespace Infrastructure.ServicesDependencies
             services.AddScoped<IAuthanticationService, AuthenticationService>();
             services.AddScoped<IAppDbContext, AppDbContext>();
             services.AddScoped<ICurrentUser, CurrentUser>();
-
-            services.AddLocalization(option => option.ResourcesPath = "Resources");
+ 
+            services.AddLocalization();
             services.AddMvc().AddDataAnnotationsLocalization();
             services.Configure<RequestLocalizationOptions>(option =>
             {
@@ -60,9 +60,14 @@ namespace Infrastructure.ServicesDependencies
             });
 
 
+            services.AddHttpLogging(options =>
+            {
+                options.LoggingFields = HttpLoggingFields.RequestProperties 
+                | HttpLoggingFields.ResponsePropertiesAndHeaders;
+            });
+           
 
 
-          
             services.AddIdentity<AppUser, IdentityRole<Guid>>(options =>
             {
                 options.Password.RequiredLength = 8;

@@ -13,7 +13,9 @@ namespace Application.Common.Interfaces
          DbSet<AppUser> AppUsers { get;}
          DbSet<Profile> Profiles { get;}
          DbSet<Post> Posts { get;}
-        public DbSet<Vote> Votes { get;  }
-        public DbSet<PostVote> PostVotes { get;  }
+         DbSet<Vote> Votes { get;  }
+         DbSet<PostVote> PostVotes { get;  }
+         DbSet<PostImages> PostImages { get;  }
+         DbSet<Comment> Comments { get;  }
     }
 }

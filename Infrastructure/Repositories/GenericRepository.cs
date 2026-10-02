@@ -19,7 +19,12 @@ namespace Infrastructure.Repositories
                 _context.Set<T>().Remove(entity);
             }
 
-            public async Task<List<T>> GetAll()
+        public void DeleteMany(List<T> entities)
+        {
+             _context.Set<T>().RemoveRange(entities);
+        }
+
+        public async Task<List<T>> GetAll()
             {
                 return await _context.Set<T>().ToListAsync();
             }

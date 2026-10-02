@@ -18,10 +18,11 @@ namespace Domain.Entities
         public  DateTime? RefreshTokenExpiration { get; set; }
 
 
-        public Profile Profile { get; set; }
+        public Profile Profile { get; set; } = null!;
 
-        public ICollection<PostVote> PostVotes { get; set; } = new List<PostVote>();
-        public ICollection<Post> Posts { get; set; } = new List<Post>();
+        //public ICollection<PostVote> PostVotes { get; set; } = new List<PostVote>();
+        //public ICollection<Post> Posts { get; set; } = new List<Post>();
+        //public ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
     }
 }

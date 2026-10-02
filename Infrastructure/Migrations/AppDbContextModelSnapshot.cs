@@ -105,6 +105,37 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Entities.Comment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsUpdated")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PostId");
+
+                    b.HasIndex("ProfileId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("Domain.Entities.Post", b =>
                 {
                     b.Property<int>("Id")
@@ -119,14 +150,9 @@ namespace Infrastructure.Migrations
                     b.Property<int>("ProfileId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ProfileId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Posts");
                 });
@@ -164,8 +190,8 @@ namespace Infrastructure.Migrations
                     b.Property<int>("PostId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("ProfileId")
+                        .HasColumnType("int");
 
                     b.Property<int>("VoteType")
                         .HasColumnType("int");
@@ -174,7 +200,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("PostId");
 
-                    b.HasIndex("UserId", "PostId")
+                    b.HasIndex("ProfileId", "PostId")
                         .IsUnique();
 
                     b.ToTable("PostVotes");
@@ -367,21 +393,32 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Entities.Comment", b =>
+                {
+                    b.HasOne("Domain.Entities.Post", "Post")
+                        .WithMany("Comments")
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Profile", "Profile")
+                        .WithMany("Comments")
+                        .HasForeignKey("ProfileId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Post");
+
+                    b.Navigation("Profile");
+                });
+
             modelBuilder.Entity("Domain.Entities.Post", b =>
                 {
                     b.HasOne("Domain.Entities.Profile", "Profile")
                         .WithMany("Posts")
                         .HasForeignKey("ProfileId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.AppUser", "AppUser")
-                        .WithMany("Posts")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("AppUser");
 
                     b.Navigation("Profile");
                 });
@@ -405,15 +442,15 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Domain.Entities.AppUser", "User")
+                    b.HasOne("Domain.Entities.Profile", "Profile")
                         .WithMany("PostVotes")
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("ProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Post");
 
-                    b.Navigation("User");
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("Domain.Entities.Profile", b =>
@@ -480,16 +517,14 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.AppUser", b =>
                 {
-                    b.Navigation("PostVotes");
-
-                    b.Navigation("Posts");
-
                     b.Navigation("Profile")
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Domain.Entities.Post", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("PostImages");
 
                     b.Navigation("PostVotes");
@@ -497,6 +532,10 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Profile", b =>
                 {
+                    b.Navigation("Comments");
+
+                    b.Navigation("PostVotes");
+
                     b.Navigation("Posts");
                 });
 #pragma warning restore 612, 618

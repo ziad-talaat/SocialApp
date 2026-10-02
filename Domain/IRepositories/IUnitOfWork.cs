@@ -14,6 +14,8 @@ namespace Domain.IRepositories
         IGenericRepository<Profile> ProfileRepository { get; }
         IGenericRepository<Post>    PostRepository { get; }
         IGenericRepository<PostVote> PostVoteRepository { get; }
+        IGenericRepository<PostImages> PostImagesRepository { get; }
+        IGenericRepository<Comment> CommentRepository { get; }
         Task<int> SaveAsync(CancellationToken cancellationToken);
 
 

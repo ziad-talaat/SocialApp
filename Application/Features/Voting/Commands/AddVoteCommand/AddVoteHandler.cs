@@ -13,15 +13,16 @@ namespace Application.Features.Voting.Commands.AddVoteCommand
     {
         public async Task<Result> Handle(AddVoteCommand request, CancellationToken cancellationToken)
         {
-
-
             if (!_currentUser.UserId.HasValue)
                 return Result.Failure(new Error("invalid user Info"));
 
+            var profile = await _context.Profiles.FirstOrDefaultAsync(x => x.UserId == _currentUser.UserId.Value);
+            if (profile is null)
+                return Result.Failure(new Error("UnExist Profile"));
 
-            var user = await _context.AppUsers.FindAsync(_currentUser.UserId.Value);
-            if (user == null)
-                return Result.Failure(new Error("No such User"));
+            //var user = await _context.AppUsers.FindAsync(_currentUser.UserId.Value);
+            //if (user == null)
+            //    return Result.Failure(new Error("No such User"));
 
             var post = await _context.Posts.FindAsync(request.voteDto.PostId);
             if (post == null)
@@ -29,14 +30,14 @@ namespace Application.Features.Voting.Commands.AddVoteCommand
 
             bool isAlreadyVoted =await   _context.PostVotes
                 .AnyAsync(v => v.PostId == request.voteDto.PostId 
-                && v.UserId == _currentUser.UserId, cancellationToken);
+                && v.ProfileId == profile.Id, cancellationToken);
             if (isAlreadyVoted)
                 return Result.Failure(new Error("User has already voted for this post")); 
             
             await _unitOfWork.PostVoteRepository.Insert(new PostVote
             {
                 PostId = request.voteDto.PostId,
-                UserId = _currentUser.UserId.Value,
+                ProfileId = profile.Id,
                 VoteType = request.voteDto.VoteType
             });
 

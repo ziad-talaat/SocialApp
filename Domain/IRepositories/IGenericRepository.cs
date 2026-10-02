@@ -16,5 +16,6 @@ namespace Domain.IRepositories
         Task Insert(T entity);
         void Update(T entity);
         void Delete(T entity);
+        void DeleteMany(List<T> entities);
     }
 }

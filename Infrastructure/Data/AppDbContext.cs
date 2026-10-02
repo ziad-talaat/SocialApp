@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Application.Common.Interfaces;
+﻿using Application.Common.Interfaces;
 using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-
 namespace Infrastructure.Data
 {
     public sealed class AppDbContext(DbContextOptions<AppDbContext> options) : IdentityDbContext<AppUser, IdentityRole<Guid>, Guid>(options),IAppDbContext
@@ -20,6 +13,9 @@ namespace Infrastructure.Data
         public DbSet<Post> Posts { get; set; }
         public DbSet<Vote> Votes { get; set; }
         public DbSet<PostVote> PostVotes { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+
+        public DbSet<PostImages> PostImages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -19,6 +19,10 @@ namespace Infrastructure.Repositories
         public IGenericRepository<Post> PostRepository { get;private set; }
         public IGenericRepository<PostVote> PostVoteRepository { get;private set; }
 
+        public IGenericRepository<Comment> CommentRepository { get; private set; }
+
+        public IGenericRepository<PostImages> PostImagesRepository { get; set; }
+
         public UnitOfWork(AppDbContext dbContext)
         {
             _dbContext= dbContext;
@@ -26,6 +30,8 @@ namespace Infrastructure.Repositories
             ProfileRepository= new GenericRepository<Profile>(_dbContext);
             PostRepository= new GenericRepository<Post>(_dbContext);
             PostVoteRepository= new GenericRepository<PostVote>(_dbContext);
+            CommentRepository=new GenericRepository<Comment>(_dbContext);
+            PostImagesRepository=new GenericRepository<PostImages>(_dbContext);
         }
         public void Dispose()
         {

@@ -7,11 +7,12 @@
       
         public int ProfileId { get; set; }
         public Profile Profile { get; set; }
-        public AppUser AppUser { get; set; }
-        public Guid UserId { get; set; }
+        //public AppUser AppUser { get; set; }
+        //public Guid UserId { get; set; }
 
         public List<PostImages> PostImages { get; set; } = new();
         public List<PostVote> PostVotes { get; set; } = new();
+        public List<Comment> Comments { get; set; } = new();
     }
 
 }

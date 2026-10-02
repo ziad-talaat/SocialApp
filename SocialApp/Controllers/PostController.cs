@@ -11,6 +11,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 
 namespace SocialApp.Controllers
 {
@@ -44,15 +45,12 @@ namespace SocialApp.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {
-            var userId = GetLoggedUserId();
-            if (userId is null)
-                return Unauthorized("UnLogged in user");
-            var deletePostCommand = new DeletePostCommand(id, userId.Value);
+            var deletePostCommand = new DeletePostCommand(id);
             Result result = await _mediator.Send(deletePostCommand);
             if (!result.IsSuccess)
                 return BadRequest(result.Errors);
             return NoContent();
-
         }
+        
     }
 }

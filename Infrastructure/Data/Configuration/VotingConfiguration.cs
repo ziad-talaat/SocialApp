@@ -11,10 +11,10 @@ namespace Infrastructure.Data.Configuration
         public void Configure(EntityTypeBuilder<PostVote> builder)
         {
             builder.HasKey(x=>x.Id);
-            builder.HasIndex(x => new { x.UserId, x.PostId })
+            builder.HasIndex(x => new { x.ProfileId, x.PostId })
             .IsUnique();
-            builder.HasOne(x => x.User).WithMany(x => x.PostVotes)
-                .HasForeignKey(x => x.UserId).IsRequired().OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(x => x.Profile).WithMany(x => x.PostVotes)
+                .HasForeignKey(x => x.ProfileId).IsRequired().OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(x => x.Post).WithMany(x => x.PostVotes)
                 .HasForeignKey(x => x.PostId).IsRequired().OnDelete(DeleteBehavior.NoAction); 
         }

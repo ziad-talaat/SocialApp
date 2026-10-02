@@ -8,7 +8,7 @@ using Microsoft.Extensions.Localization;
 
 namespace SocialApp.Controllers
 {
-    public class AuthenticationController(IMediator _mediator) : BaseController
+    public class AuthenticationController(IMediator _mediator,IStringLocalizer<AuthenticationController>_localizer,ILogger<AuthenticationController>_logger) : BaseController
     {
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDto loginDto)
@@ -30,7 +30,15 @@ namespace SocialApp.Controllers
             return BadRequest(result.Error);
         }
 
+        [HttpGet]
+        public IActionResult GetMessage()
+        {
+            _logger.LogInformation("Got get message Info");
 
+            var name = "mohaed";
+            _logger.LogInformation($"debug {name} from controller");
+            return Ok(_localizer["welcome ",name]);
+        }
 
     }
 }

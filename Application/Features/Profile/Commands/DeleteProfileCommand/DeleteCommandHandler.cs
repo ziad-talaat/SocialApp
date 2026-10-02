@@ -10,15 +10,16 @@ using MediatR;
 
 namespace Application.Features.Profile.Commands.DeleteProfileCommand
 {
-    internal sealed class DeleteCommandHandler(IAppDbContext _context,IUnitOfWork _unitOfWork) : IRequestHandler<DeleteProfileCommand, Result>
+    internal sealed class DeleteCommandHandler(IAppDbContext _context,ICurrentUser _currentUser,IUnitOfWork _unitOfWork) : IRequestHandler<DeleteProfileCommand, Result>
     {
         public async  Task<Result> Handle(DeleteProfileCommand request, CancellationToken cancellationToken)
         {
+            if(!_currentUser.UserId.HasValue)
+                return Result.Failure(new Error("Forbidden Operation"));
+
             var profile = await _context.Profiles.FindAsync(request.profileId);
-            if (profile == null)
+            if (profile == null || profile.UserId!=_currentUser.UserId)
                 return Result.Failure(new Error("No such Profile"));
-            if(profile.UserId != request.userId)
-                return Result.Failure(new Error("Forbidden action"));
 
             _unitOfWork.ProfileRepository.Delete(profile);
            await  _unitOfWork.SaveAsync(cancellationToken);
