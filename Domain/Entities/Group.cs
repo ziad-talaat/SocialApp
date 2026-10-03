@@ -11,7 +11,7 @@ namespace Domain.Entities
     {
         public  int Id { get; set; }
         public string GroupName { get; set; } = null!;
-        public string Description { get; set; } = null!;
+        public string? Description { get; set; } 
         public  string? CoverImageUrl { get; set; }
         public GroupPrivacy Privacy { get; set; } = GroupPrivacy.Public;
         public bool RequireMemberApproval { get; set; }  
@@ -25,17 +25,5 @@ namespace Domain.Entities
         public ICollection<GroupMember> GroupMembers { get; set; } = new List<GroupMember>();
         public ICollection<Post> Post { get; set; } = new List<Post>();
     }
-    public sealed  class GroupMember
-    {
-        public int GroupId { get; set; }
-        public Group Group { get; set; }
-        public int ProfileId { get; set; }
-        public Profile Profile { get; set; }
-
-        public GroupRole GroupRole { get; set; }
-
-        public DateTime JoinedDate { get; set; } = DateTime.UtcNow;
-
-    } 
 
 }

@@ -10,6 +10,7 @@ namespace Application.Features.Post.Dtos
     {
         public int? PostId { get; set; }
         public string? Description { get; set; }
-        public List<string> ImagesUrl { get; set; }=new List<string>();
+        public List<string>? ImagesUrl { get; set; }
+        public int? GroupId { get; set; }
     }
 }

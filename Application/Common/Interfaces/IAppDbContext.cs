@@ -17,5 +17,7 @@ namespace Application.Common.Interfaces
          DbSet<PostVote> PostVotes { get;  }
          DbSet<PostImages> PostImages { get;  }
          DbSet<Comment> Comments { get;  }
+         DbSet<Group> Groups { get; }
+         DbSet<GroupMember> GroupMembers { get; }
     }
 }

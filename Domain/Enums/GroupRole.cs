@@ -9,6 +9,7 @@ namespace Domain.Enums
     public enum GroupRole
     {
         Member,
-        Admin
+        Admin,
+        Owner
     }
 }

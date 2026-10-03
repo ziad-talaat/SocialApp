@@ -14,6 +14,8 @@ namespace Infrastructure.Data
         public DbSet<Vote> Votes { get; set; }
         public DbSet<PostVote> PostVotes { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<GroupMember> GroupMembers { get; set; }
 
         public DbSet<PostImages> PostImages { get; set; }
 

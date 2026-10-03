@@ -9,5 +9,5 @@ using MediatR;
 
 namespace Application.Features.Post.Commands.CreatePost
 {
-    public sealed record CreatePostCommand(PostDto postDto,int ProfileId):IRequest<Result>;
+    public sealed record CreatePostCommand(PostDto postDto):IRequest<Result>;
 }

@@ -11,11 +11,15 @@ namespace Domain.Entities
         public string? ImageUrl { get; set; }
         public DateOnly Created { get; set; } = DateOnly.FromDateTime(DateTime.UtcNow);
         public DateTime LastActive { get; set; } = DateTime.UtcNow;
+        public bool IsLocked { get; set; } 
+
         public Guid UserId { get; set; }
         public AppUser User { get; set; } = null!;
         public ICollection<Post> Posts { get; set; } = new List<Post>();
         public ICollection<PostVote> PostVotes { get; set; } = new List<PostVote>();
         public ICollection<Comment> Comments { get; set; } = new List<Comment>();
+        public ICollection<Group> OwnedGroups { get; set; } = new List<Group>();
+        public ICollection<GroupMember> GroupMemberships { get; set; } = new List<GroupMember>();
 
 
     }

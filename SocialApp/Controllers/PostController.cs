@@ -19,9 +19,9 @@ namespace SocialApp.Controllers
     public class PostController(IMediator _mediator) : BaseController
     {
         [HttpPost]
-        public async Task<IActionResult> Post(PostDto postDto,int profileId)
+        public async Task<IActionResult> Post(PostDto postDto)
         {
-            var createPostCommand = new CreatePostCommand(postDto, profileId);
+            var createPostCommand = new CreatePostCommand(postDto);
             Result result = await _mediator.Send(createPostCommand);
             if (!result.IsSuccess)
                 return BadRequest(result.Errors);
@@ -32,10 +32,8 @@ namespace SocialApp.Controllers
         [HttpPut]
         public async Task<IActionResult> Put(PostDto postDto)
         {
-            var id = GetLoggedUserId();
-            if (id is null)
-                return Unauthorized("UnLogged in user");
-            var updatePostCommand = new UpdatePostCommand(postDto, id.Value);
+           
+            var updatePostCommand = new UpdatePostCommand(postDto);
             Result result = await _mediator.Send(updatePostCommand);
             if (!result.IsSuccess)
                 return BadRequest(result.Errors);

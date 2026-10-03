@@ -8,6 +8,7 @@ using Application.Features.Comment.DTOS;
 using Application.Features.Comment.Queries.GetCommentsPerPost;
 using Application.Features.Post.Commands.DeletePostCommand;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ namespace SocialApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-
+    [Authorize]
     public class CommentController(IMediator _mediator) : ControllerBase
     {
         [HttpGet("getCommentsByPost")]

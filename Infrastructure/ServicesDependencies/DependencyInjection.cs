@@ -60,11 +60,11 @@ namespace Infrastructure.ServicesDependencies
             });
 
 
-            services.AddHttpLogging(options =>
-            {
-                options.LoggingFields = HttpLoggingFields.RequestProperties 
-                | HttpLoggingFields.ResponsePropertiesAndHeaders;
-            });
+            //services.AddHttpLogging(options =>
+            //{
+            //    options.LoggingFields = HttpLoggingFields.RequestProperties 
+            //    | HttpLoggingFields.ResponsePropertiesAndHeaders;
+            //});
            
 
 

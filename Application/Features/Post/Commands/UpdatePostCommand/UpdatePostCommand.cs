@@ -3,6 +3,6 @@ using Application.Features.Post.Dtos;
 using MediatR;
 namespace Application.Features.Post.Commands.UpdateCommand
 {
-    public sealed record UpdatePostCommand(PostDto postDto,Guid userId):IRequest<Result>;
+    public sealed record UpdatePostCommand(PostDto postDto):IRequest<Result>;
    
 }
