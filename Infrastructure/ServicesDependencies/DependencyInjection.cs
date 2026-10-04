@@ -42,7 +42,9 @@ namespace Infrastructure.ServicesDependencies
             services.AddScoped<IAuthanticationService, AuthenticationService>();
             services.AddScoped<IAppDbContext, AppDbContext>();
             services.AddScoped<ICurrentUser, CurrentUser>();
- 
+
+            services.AddProblemDetails();
+
             services.AddLocalization();
             services.AddMvc().AddDataAnnotationsLocalization();
             services.Configure<RequestLocalizationOptions>(option =>

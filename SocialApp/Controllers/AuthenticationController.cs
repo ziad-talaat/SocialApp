@@ -37,7 +37,7 @@ namespace SocialApp.Controllers
 
             var name = "mohaed";
             _logger.LogInformation($"debug {name} from controller");
-            return Ok(_localizer["welcome ",name]);
+            return Ok(_localizer["welcome ", name]);
         }
 
     }

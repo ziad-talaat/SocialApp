@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Common.Interfaces;
+﻿using Application.Common.Interfaces;
 using Application.Common.ResultPattern;
 using Domain.IRepositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-
 namespace Application.Features.Post.Commands.UpdateCommand
 {
     internal class UpdatePostCommandHandler(IAppDbContext _context,IUnitOfWork _unitOfWork,ICurrentUser _currentUser) : IRequestHandler<UpdatePostCommand, Result>

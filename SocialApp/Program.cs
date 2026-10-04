@@ -1,5 +1,7 @@
 using Infrastructure.ServicesDependencies;
 using Serilog;
+using SocialApp.ExceptionHandling;
+using SocialApp.Middlewares;
 namespace SocialApp
 {
     public class Program
@@ -11,10 +13,12 @@ namespace SocialApp
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            
+            builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+            builder.Services.AddExceptionHandler<GlobalValidationExceptionHandler>();
 
 
             //Serilog
-
             builder.Host.UseSerilog((HostBuilderContext context, IServiceProvider services
                 , LoggerConfiguration loggerConfiguration) =>
             {
@@ -33,7 +37,7 @@ namespace SocialApp
 
 
             var app = builder.Build();
-            app.UseSerilogRequestLogging();
+            app.UseSerilogRequestLogging(); //added one extra log at the end of the request so you can add more Addetion information  using IDiagonosticContext
 
             if (app.Environment.IsDevelopment())
             {
@@ -47,7 +51,8 @@ namespace SocialApp
             app.UseAuthorization();
 
             app.MapControllers();
-
+            //app.UseExceptionHandlingMiddleware();   // old way to add global exception handler using middleware
+            app.UseExceptionHandler();
             app.Run();
         }
     }
