@@ -12,7 +12,7 @@ namespace SocialApp.ExceptionHandling
             {
                 return false;
             }
-
+             
             _logger.LogError(exception, "Validation Failed");
 
                 var validationProblemDetails = new ValidationProblemDetails
@@ -23,7 +23,7 @@ namespace SocialApp.ExceptionHandling
                     Detail = $"Some validation Properties have failed",
                     Errors = validationException.Errors
                     .GroupBy(x => x.PropertyName)
-                    .ToDictionary(g => g.Key.Split('.')[1], g => g.Select(x => x.ErrorMessage).ToArray())
+                    .ToDictionary(g => g.Key.Split('.').Last(), g => g.Select(x => x.ErrorMessage).ToArray())
 
                 };
                 httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
