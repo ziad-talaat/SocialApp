@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Group\Queries\" />
     <Folder Include="Features\Post\Queries\" />
     <Folder Include="Features\Profile\Queries\" />
   </ItemGroup>
@@ -28,12 +29,30 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>CommentValidation.resx</DependentUpon>
     </Compile>
+    <Compile Update="Resources\GlobalValidationMessagesRes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GlobalValidationMessagesRes.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\GroupResources\GroupValidationRes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GroupValidationRes.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Update="Resources\CommentValidation.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CommentValidation.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\GlobalValidationMessagesRes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GlobalValidationMessagesRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\GroupResources\GroupValidationRes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GroupValidationRes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
 

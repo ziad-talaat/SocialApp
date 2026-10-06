@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-
 namespace SocialApp.ExceptionHandling
 {
     public sealed  class GlobalValidationExceptionHandler(ILogger<GlobalValidationExceptionHandler>_logger) : IExceptionHandler
@@ -24,7 +23,6 @@ namespace SocialApp.ExceptionHandling
                     Errors = validationException.Errors
                     .GroupBy(x => x.PropertyName)
                     .ToDictionary(g => g.Key.Split('.').Last(), g => g.Select(x => x.ErrorMessage).ToArray())
-
                 };
                 httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
                 await httpContext.Response.WriteAsJsonAsync(validationProblemDetails, cancellationToken: cancellationToken);

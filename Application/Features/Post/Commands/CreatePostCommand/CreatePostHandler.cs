@@ -26,7 +26,7 @@ namespace Application.Features.Post.Commands.CreatePost
             {
                 var groupId = request.postDto.GroupId.Value;
 
-                Group? group= await _context.Groups.AsNoTracking()
+                Domain.Entities.Group? group= await _context.Groups.AsNoTracking()
                     .FirstOrDefaultAsync(x=>x.Id==groupId,cancellationToken);
                 if (group is null)
                     return Result.Failure(new Error("GroupNotFound"));

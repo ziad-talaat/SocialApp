@@ -5,11 +5,13 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Common.Interfaces;
+using Application.Common.ResultPattern;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Services
 {
-    public sealed class CurrentUser (IHttpContextAccessor _httpContextAccessor): ICurrentUser
+    public sealed class CurrentUser (IHttpContextAccessor _httpContextAccessor,IAppDbContext _context): ICurrentUser
     {
 
         public Guid? UserId { 
@@ -21,5 +23,18 @@ namespace Infrastructure.Services
             }
             
         }
+
+
+        public async Task<int?> GetProfileId()
+        {
+            if(!UserId.HasValue)
+                return null;
+            var profile = await _context.Profiles.FirstOrDefaultAsync(x => x.UserId == UserId.Value);
+
+            return profile?.Id;
+
+
+        }
+
     }
 }
