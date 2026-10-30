@@ -23,8 +23,8 @@ namespace Application.Features.Comment.Commands.DeleteCommentCommand
                 return Result<bool>.Failure(new Error("UnExist Profile"));
 
 
-            var comment = await _context.Comments.FirstOrDefaultAsync(x => x.Id == request.CommentId);
-            if(comment is null || comment.ProfileId != profile.Id)
+            var comment = await _context.Comments.Include(x=>x.Post).FirstOrDefaultAsync(x => x.Id == request.CommentId);
+            if(comment is null ||   (comment.ProfileId != profile.Id  && comment.Post.ProfileId!=profile.Id) )
                 return Result<bool>.Failure(new Error("Forbbiden Operation"));
 
             _unitOfWork.CommentRepository.Delete(comment);

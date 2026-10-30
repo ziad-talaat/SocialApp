@@ -1,18 +1,11 @@
 ﻿using Application.Common.ResultPattern;
-using Application.Features.Comment.Commands.CreateCommentCommand;
-using Application.Features.Comment.Commands.DeleteCommentCommand;
-using Application.Features.Comment.Commands.UpdateCommentCommand;
-using Application.Features.Comment.DTOS;
-using Application.Features.Comment.Queries.GetCommentsPerPost;
 using Application.Features.Group.Commands.CreateGroupCommand;
 using Application.Features.Group.Commands.DeleteGroupCommand;
 using Application.Features.Group.Commands.UpdateGroupCommand;
 using Application.Features.Group.DTOS;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
 namespace SocialApp.Controllers
 {
     [Route("api/[controller]")]
