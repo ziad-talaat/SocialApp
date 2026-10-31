@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Application.Resources {
+namespace Application.Resources.GlobalResources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Application.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Application.Resources.GlobalValidationMessagesRes", typeof(GlobalValidationMessagesRes).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Application.Resources.GlobalResources.GlobalValidationMessagesRes", typeof(GlobalValidationMessagesRes).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

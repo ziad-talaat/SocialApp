@@ -21,8 +21,8 @@ namespace Application.Features.Comment.Commands.CreateCommentCommand
               return  Result.Failure(new Error("unAuthorized User"));
 
            var post=  await  _context.Posts.FindAsync(request.createCommentDto.PostId);
-            if(post is null)
-                return  Result.Failure(new Error("UnExist Post"));
+            if(post is null || !post.AllowComments)
+                return  Result.Failure(new Error("Invalid Operation"));
 
             var profile = await _context.Profiles.FirstOrDefaultAsync(x => x.UserId == _currentUser.UserId.Value);
             if (profile is null)

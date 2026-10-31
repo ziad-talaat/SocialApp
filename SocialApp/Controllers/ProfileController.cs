@@ -1,6 +1,7 @@
 ﻿using Application.Common.ResultPattern;
 using Application.Features.Profile.Commands.CreateProfile;
 using Application.Features.Profile.Commands.DeleteProfileCommand;
+using Application.Features.Profile.Commands.LockAccountCommand;
 using Application.Features.Profile.Commands.UpdateProfileCommand;
 using Application.Features.Profile.DTOS;
 using MediatR;
@@ -11,14 +12,14 @@ using Microsoft.Extensions.Localization;
 namespace SocialApp.Controllers
 {
     [Authorize]
-    public class ProfileController(IMediator _mediator,IStringLocalizer<ProfileController>_localizer) : BaseController
+    public class ProfileController(IMediator _mediator, IStringLocalizer<> _AuthLocalizer) : BaseController
     {
         [HttpPost]
         public async Task <IActionResult> Post(ProfileDto profileDto)
         {
             var id = GetLoggedUserId();
             if (id is null)
-                return Unauthorized("UnLogged in user");
+                return Unauthorized();
             var createProfileCommand = new CreateProfileCommand(profileDto, id.Value);
            Result result= await  _mediator.Send(createProfileCommand);
             if(!result.IsSuccess)
@@ -50,6 +51,18 @@ namespace SocialApp.Controllers
             Result result = await _mediator.Send(deleteProfileCommand);
             if (!result.IsSuccess)
                 return BadRequest(result.Errors);
+            return NoContent();
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LockUnLockAccount(int profileId)
+        {
+           
+            var lockUnLockAccountCommand = new LockUnLockAccountCommand(profileId);
+            Result result = await _mediator.Send(lockUnLockAccountCommand);
+            if (!result.IsSuccess)
+                return Problem(detail: result.Errors?.FirstOrDefault()?.Message ?? "", statusCode: StatusCodes.Status400BadRequest);
             return NoContent();
 
         }

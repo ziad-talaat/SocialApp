@@ -2,7 +2,6 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-
 namespace SocialApp.ExceptionHandling
 {
     public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler>_logger, IProblemDetailsService _problemDetailsService) : IExceptionHandler

@@ -24,12 +24,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\CommentValidation.Designer.cs">
+    <Compile Update="Resources\AuthenticationResources\AuthRes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AuthRes.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\CommentResources\CommentValidation.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>CommentValidation.resx</DependentUpon>
     </Compile>
-    <Compile Update="Resources\GlobalValidationMessagesRes.Designer.cs">
+    <Compile Update="Resources\GlobalResources\GlobalValidationMessagesRes.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>GlobalValidationMessagesRes.resx</DependentUpon>
@@ -42,11 +47,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Resources\CommentValidation.resx">
+    <EmbeddedResource Update="Resources\AuthenticationResources\AuthRes.ar.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\AuthenticationResources\AuthRes.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AuthRes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\CommentResources\CommentValidation.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CommentValidation.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\GlobalValidationMessagesRes.resx">
+    <EmbeddedResource Update="Resources\GlobalResources\GlobalValidationMessagesRes.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>GlobalValidationMessagesRes.Designer.cs</LastGenOutput>
     </EmbeddedResource>

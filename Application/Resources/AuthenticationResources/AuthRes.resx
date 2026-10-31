@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="missingDescription" xml:space="preserve">
-    <value>التعليق فارغ</value>
+  <data name="UnAuthenticatedUser" xml:space="preserve">
+    <value>you need to login first</value>
   </data>
 </root>

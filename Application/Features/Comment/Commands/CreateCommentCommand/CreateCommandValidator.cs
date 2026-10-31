@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Resources;
+using Application.Resources.CommentResources;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;

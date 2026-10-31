@@ -41,7 +41,7 @@ namespace SocialApp.Controllers
             var deleteCommentCommand = new DeleteCommentCommand(commentId);
             var result = await _mediator.Send<Result<bool>>(deleteCommentCommand);
             if (!result.IsSuccess)
-                return BadRequest(result.Error);
+                return BadRequest(new ProblemDetails {  Detail = result?.Error?.Message });
             return Ok(result);
         }
 
