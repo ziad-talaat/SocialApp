@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Common.Interfaces;
+﻿using Application.Common.Interfaces;
 using Application.Common.ResultPattern;
-using Application.Resources;
 using Application.Resources.GlobalResources;
+using Domain.Entities;
 using Domain.Enums;
 using Domain.IRepositories;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
-
 namespace Application.Features.Group.Commands.CreateGroupCommand
 {
     internal sealed class CreateGroupCommandHandler(ICurrentUser _currentUser,IStringLocalizer<GlobalValidationMessagesRes>_globalValidationRes, IAppDbContext _context,IUnitOfWork _unitOfWork) : IRequestHandler<CreateGroupCommand, Result>
@@ -27,18 +21,18 @@ namespace Application.Features.Group.Commands.CreateGroupCommand
                 return Result.Failure(new Error(_globalValidationRes[nameof(GlobalValidationMessagesRes.UnExistProfile)]));
 
             Domain.Entities.Group group =request.createGroupDto.GetGroup(profile.Id);
-            //new Domain.Entities.Group()
-            //{
-            //    GroupName = request.createGroupDto.GroupName,
-            //    Description = request.createGroupDto.Description,
-            //    CoverImageUrl = request.createGroupDto.CoverImageUrl,
-            //    Privacy = request.createGroupDto.Privacy,
-            //    RequireMemberApproval = request.createGroupDto.RequireMemberApproval,
-            //    RequirePostApproval = request.createGroupDto.RequirePostApproval,
-            //    CreatorId=profileId.Value,
-            //}; 
+
 
            await  _unitOfWork.GroupRepository.Insert(group);
+            var groupMember = new GroupMember
+            {
+                GroupId = group.Id,
+                ProfileId = profile.Id,
+                GroupRole = GroupRole.Owner,
+                Status = GroupMemberStatus.Active,
+                JoinedDate = DateTime.UtcNow
+            };
+            await _unitOfWork.GroupMemberRepository.Insert(groupMember);
             await _unitOfWork.SaveAsync(cancellationToken);
             return Result.Success();
         }

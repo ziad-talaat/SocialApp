@@ -122,5 +122,14 @@ namespace Application.Resources.GroupResources {
                 return ResourceManager.GetString("PermissionDenied", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Request already has been sent.
+        /// </summary>
+        internal static string RequestExist {
+            get {
+                return ResourceManager.GetString("RequestExist", resourceCulture);
+            }
+        }
     }
 }

@@ -138,4 +138,7 @@
   <data name="PermissionDenied" xml:space="preserve">
     <value>ليس لديك صلاحيه لهذه العمليه</value>
   </data>
+  <data name="RequestExist" xml:space="preserve">
+    <value>تم ارسال الطلب بالفعل</value>
+  </data>
 </root>

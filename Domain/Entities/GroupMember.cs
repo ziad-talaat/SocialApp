@@ -9,10 +9,9 @@ namespace Domain.Entities
         public int ProfileId { get; set; }
         public Profile Profile { get; set; }
 
-        public GroupRole GroupRole { get; set; }
-        public GroupMemberStatus Status { get; set; } = GroupMemberStatus.Active;
-        public DateTime JoinedDate { get; set; } = DateTime.UtcNow;
-
+        public GroupRole GroupRole { get; set; } = GroupRole.Member;
+        public GroupMemberStatus Status { get; set; } = GroupMemberStatus.Pending;
+        public DateTime? JoinedDate { get; set; } = null;
     } 
 
 }

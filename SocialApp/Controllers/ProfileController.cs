@@ -4,6 +4,7 @@ using Application.Features.Profile.Commands.DeleteProfileCommand;
 using Application.Features.Profile.Commands.LockAccountCommand;
 using Application.Features.Profile.Commands.UpdateProfileCommand;
 using Application.Features.Profile.DTOS;
+using Application.Resources.AuthenticationResources;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,7 @@ using Microsoft.Extensions.Localization;
 namespace SocialApp.Controllers
 {
     [Authorize]
-    public class ProfileController(IMediator _mediator, IStringLocalizer<> _AuthLocalizer) : BaseController
+    public class ProfileController(IMediator _mediator, IStringLocalizer<AuthRes> _AuthLocalizer) : BaseController
     {
         [HttpPost]
         public async Task <IActionResult> Post(ProfileDto profileDto)
@@ -33,7 +34,7 @@ namespace SocialApp.Controllers
         {
             var id = GetLoggedUserId();
             if (id is null)
-                return Unauthorized("UnLogged in user");
+                return Unauthorized(_AuthLocalizer[nameof(AuthRes.UnAuthenticatedUser)]);
             var updateProfileCommand = new UpdateProfileCommand(profileDto,id.Value);
             Result result = await _mediator.Send(updateProfileCommand);
             if (!result.IsSuccess)
@@ -46,7 +47,7 @@ namespace SocialApp.Controllers
         {
             var userId = GetLoggedUserId();
             if (userId is null)
-                return Unauthorized("UnLogged in user");
+                return Unauthorized(_AuthLocalizer[nameof(AuthRes.UnAuthenticatedUser)]);
             var deleteProfileCommand = new DeleteProfileCommand(id, userId.Value);
             Result result = await _mediator.Send(deleteProfileCommand);
             if (!result.IsSuccess)

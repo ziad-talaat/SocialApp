@@ -24,6 +24,7 @@ namespace Infrastructure.Repositories
         public IGenericRepository<PostImages> PostImagesRepository { get; set; }
 
         public IGenericRepository<Group> GroupRepository { get; set; }
+        public IGenericRepository<GroupMember> GroupMemberRepository { get; set; }
 
         public UnitOfWork(AppDbContext dbContext)
         {
@@ -35,6 +36,7 @@ namespace Infrastructure.Repositories
             CommentRepository=new GenericRepository<Comment>(_dbContext);
             PostImagesRepository=new GenericRepository<PostImages>(_dbContext);
             GroupRepository=new GenericRepository<Group>(_dbContext);
+            GroupMemberRepository=new GenericRepository<GroupMember>(_dbContext);
         }
         public void Dispose()
         {

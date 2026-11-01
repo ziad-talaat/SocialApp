@@ -138,4 +138,7 @@
   <data name="PermissionDenied" xml:space="preserve">
     <value>you don't have the permission to do this operation</value>
   </data>
+  <data name="RequestExist" xml:space="preserve">
+    <value>Request already has been sent</value>
+  </data>
 </root>

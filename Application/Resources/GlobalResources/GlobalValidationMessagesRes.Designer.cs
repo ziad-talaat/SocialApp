@@ -61,6 +61,15 @@ namespace Application.Resources.GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid Operation.
+        /// </summary>
+        internal static string InvalidOperation {
+            get {
+                return ResourceManager.GetString("InvalidOperation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You need to Login First.
         /// </summary>
         internal static string UnAuthorizedUser {
