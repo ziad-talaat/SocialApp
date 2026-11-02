@@ -18,7 +18,14 @@ namespace Domain.IRepositories
         IGenericRepository<Comment> CommentRepository { get; }
         IGenericRepository<Group> GroupRepository { get; }
         IGenericRepository<GroupMember> GroupMemberRepository { get; }
+        IGenericRepository<ProfileFollowers> ProfileFollowersRepository { get; }
+        IGenericRepository<FriendShip> FriendShipRepository { get; }
         Task<int> SaveAsync(CancellationToken cancellationToken);
+
+
+        Task BeginTransactionAsync(CancellationToken cancellationToken);
+        Task CommitTransactionAsync(CancellationToken cancellationToken);
+        Task RollbackTransactionAsync(CancellationToken cancellationToken);
 
 
     }

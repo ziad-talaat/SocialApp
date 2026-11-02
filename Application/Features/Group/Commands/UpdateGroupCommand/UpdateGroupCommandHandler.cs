@@ -21,7 +21,7 @@ namespace Application.Features.Group.Commands.UpdateGroupCommand
         public async Task<Result> Handle(UpdateGroupCommand request, CancellationToken cancellationToken)
         {
             if (!_currentUser.UserId.HasValue)
-                return Result.Failure(new Error(_globalValidationRes[nameof(GlobalValidationMessagesRes.UnAuthorizedUser)]));
+                return Result.Failure(new Error(_globalValidationRes[nameof(GlobalValidationMessagesRes.UnAuthenticatedUser)]));
 
 
           var group=await  _context.Groups.FindAsync(request.updateGroupDto.GroupId);

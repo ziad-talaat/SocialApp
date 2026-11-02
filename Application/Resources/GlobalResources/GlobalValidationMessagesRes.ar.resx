@@ -120,7 +120,7 @@
   <data name="InvalidOperation" xml:space="preserve">
     <value>عمليه غير صحيحه</value>
   </data>
-  <data name="UnAuthorizedUser" xml:space="preserve">
+  <data name="UnAuthenticatedUser" xml:space="preserve">
     <value>تحتاج الي تسجيل دخول اولا</value>
   </data>
   <data name="UnExistProfile" xml:space="preserve">

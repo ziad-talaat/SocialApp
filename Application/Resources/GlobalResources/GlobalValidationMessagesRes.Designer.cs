@@ -72,9 +72,9 @@ namespace Application.Resources.GlobalResources {
         /// <summary>
         ///   Looks up a localized string similar to You need to Login First.
         /// </summary>
-        internal static string UnAuthorizedUser {
+        internal static string UnAuthenticatedUser {
             get {
-                return ResourceManager.GetString("UnAuthorizedUser", resourceCulture);
+                return ResourceManager.GetString("UnAuthenticatedUser", resourceCulture);
             }
         }
         

@@ -8,7 +8,3 @@ namespace Domain.Enums
     }
 }
 
-// pending   -> when user send request to join private groups
-// active  -> when admin or owner accept user order or user join public group
-//invited -> when admin or owner send invitation to user
-// banned ->  when admin or owner banned a user 

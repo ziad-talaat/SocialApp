@@ -22,5 +22,16 @@ namespace Domain.Entities
         public ICollection<GroupMember> GroupMemberships { get; set; } = new List<GroupMember>();
 
 
+
+        public ICollection<ProfileFollowers> Followers { get; set; } = new List<ProfileFollowers>();
+        public ICollection<ProfileFollowers> Following { get; set; } = new List<ProfileFollowers>();
+
+
+        public ICollection<FriendShip> SentFRiendShipRequests { get; set; } = new List<FriendShip>();
+        public ICollection<FriendShip> ReceivedFRiendShipRequests { get; set; } = new List<FriendShip>();
+
+
+
+
     }
 }

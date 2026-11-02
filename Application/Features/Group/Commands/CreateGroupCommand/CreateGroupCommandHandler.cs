@@ -14,7 +14,7 @@ namespace Application.Features.Group.Commands.CreateGroupCommand
         public async Task<Result> Handle(CreateGroupCommand request, CancellationToken cancellationToken)
         {
             if (!_currentUser.UserId.HasValue)
-                return Result.Failure(new Error(_globalValidationRes[nameof(GlobalValidationMessagesRes.UnAuthorizedUser)]));
+                return Result.Failure(new Error(_globalValidationRes[nameof(GlobalValidationMessagesRes.UnAuthenticatedUser)]));
 
             var profile= await _context.Profiles.FirstOrDefaultAsync(x=>x.UserId==_currentUser.UserId.Value);
             if(profile is null)
@@ -23,15 +23,15 @@ namespace Application.Features.Group.Commands.CreateGroupCommand
             Domain.Entities.Group group =request.createGroupDto.GetGroup(profile.Id);
 
 
-           await  _unitOfWork.GroupRepository.Insert(group);
             var groupMember = new GroupMember
             {
-                GroupId = group.Id,
+                Group=group,
                 ProfileId = profile.Id,
                 GroupRole = GroupRole.Owner,
                 Status = GroupMemberStatus.Active,
                 JoinedDate = DateTime.UtcNow
             };
+            await  _unitOfWork.GroupRepository.Insert(group);
             await _unitOfWork.GroupMemberRepository.Insert(groupMember);
             await _unitOfWork.SaveAsync(cancellationToken);
             return Result.Success();

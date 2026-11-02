@@ -136,6 +136,27 @@ namespace Infrastructure.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("Domain.Entities.FriendShip", b =>
+                {
+                    b.Property<int>("SenderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReceiverId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("FriendShipStatus")
+                        .HasColumnType("int");
+
+                    b.HasKey("SenderId", "ReceiverId");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.ToTable("FriendShips");
+                });
+
             modelBuilder.Entity("Domain.Entities.Group", b =>
                 {
                     b.Property<int>("Id")
@@ -191,7 +212,7 @@ namespace Infrastructure.Migrations
                     b.Property<int>("GroupRole")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("JoinedDate")
+                    b.Property<DateTime?>("JoinedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Status")
@@ -325,6 +346,24 @@ namespace Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Profiles");
+                });
+
+            modelBuilder.Entity("Domain.Entities.ProfileFollowers", b =>
+                {
+                    b.Property<int>("SourceUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TargetUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FollowingDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("SourceUserId", "TargetUserId");
+
+                    b.HasIndex("TargetUserId");
+
+                    b.ToTable("ProfileFollowers");
                 });
 
             modelBuilder.Entity("Domain.Entities.Vote", b =>
@@ -494,6 +533,25 @@ namespace Infrastructure.Migrations
                     b.Navigation("Profile");
                 });
 
+            modelBuilder.Entity("Domain.Entities.FriendShip", b =>
+                {
+                    b.HasOne("Domain.Entities.Profile", "Receiver")
+                        .WithMany("ReceivedFRiendShipRequests")
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Profile", "Sender")
+                        .WithMany("SentFRiendShipRequests")
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Sender");
+                });
+
             modelBuilder.Entity("Domain.Entities.Group", b =>
                 {
                     b.HasOne("Domain.Entities.Profile", "Creator")
@@ -583,6 +641,25 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Domain.Entities.ProfileFollowers", b =>
+                {
+                    b.HasOne("Domain.Entities.Profile", "SourceUser")
+                        .WithMany("Following")
+                        .HasForeignKey("SourceUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Profile", "TargetUser")
+                        .WithMany("Followers")
+                        .HasForeignKey("TargetUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("SourceUser");
+
+                    b.Navigation("TargetUser");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
@@ -660,6 +737,10 @@ namespace Infrastructure.Migrations
                 {
                     b.Navigation("Comments");
 
+                    b.Navigation("Followers");
+
+                    b.Navigation("Following");
+
                     b.Navigation("GroupMemberships");
 
                     b.Navigation("OwnedGroups");
@@ -667,6 +748,10 @@ namespace Infrastructure.Migrations
                     b.Navigation("PostVotes");
 
                     b.Navigation("Posts");
+
+                    b.Navigation("ReceivedFRiendShipRequests");
+
+                    b.Navigation("SentFRiendShipRequests");
                 });
 #pragma warning restore 612, 618
         }

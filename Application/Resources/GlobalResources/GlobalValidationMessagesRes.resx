@@ -120,7 +120,7 @@
   <data name="InvalidOperation" xml:space="preserve">
     <value>Invalid Operation</value>
   </data>
-  <data name="UnAuthorizedUser" xml:space="preserve">
+  <data name="UnAuthenticatedUser" xml:space="preserve">
     <value>You need to Login First</value>
   </data>
   <data name="UnExistProfile" xml:space="preserve">

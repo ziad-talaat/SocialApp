@@ -13,7 +13,7 @@ namespace Application.Features.Comment.Commands.DeleteCommentCommand
         public async Task<Result<bool>> Handle(DeleteCommentCommand request, CancellationToken cancellationToken)
         {
             if (!_currentUser.UserId.HasValue)
-                return Result<bool>.Failure(new Error(_globalLocalizer[nameof(GlobalValidationMessagesRes.UnAuthorizedUser)]));
+                return Result<bool>.Failure(new Error(_globalLocalizer[nameof(GlobalValidationMessagesRes.UnAuthenticatedUser)]));
 
             var profile = await _context.Profiles.FirstOrDefaultAsync(x => x.UserId == _currentUser.UserId.Value);
             if (profile is null)

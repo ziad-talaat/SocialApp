@@ -19,5 +19,7 @@ namespace Application.Common.Interfaces
          DbSet<Comment> Comments { get;  }
          DbSet<Group> Groups { get; }
          DbSet<GroupMember> GroupMembers { get; }
+         DbSet<ProfileFollowers> ProfileFollowers { get; }
+         DbSet<FriendShip> FriendShips { get;  }
     }
 }
